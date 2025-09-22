@@ -35,9 +35,23 @@ def get_available_vehicles():
         print(f"Datenbankfehler: {e}")
         return []
 
+def get_vehicle_status(vehicle_id):
+    """
+    Gibt den aktuellen Status eines Fahrzeugs zurück.
+    """
+    try:
+        cur.execute("SELECT Status FROM Vehicle WHERE VehicleID = ?", (vehicle_id,))
+        result = cur.fetchone()
+        if result:
+            return result[0]
+        return None
+    except sqlite3.Error as e:
+        print(f"Datenbankfehler: {e}")
+        return None
+        
 def update_vehicle_status(vehicle_id, new_status):
     """
-    Aktualisiert den Status eines Fahrzeugs.
+    Aktualisiert den Status eines Fahrzeugs in der Datenbank.
     """
     try:
         cur.execute("UPDATE Vehicle SET Status = ? WHERE VehicleID = ?", (new_status, vehicle_id))
@@ -45,4 +59,3 @@ def update_vehicle_status(vehicle_id, new_status):
         print(f"Status von Fahrzeug {vehicle_id} erfolgreich auf '{new_status}' aktualisiert.")
     except sqlite3.Error as e:
         print(f"Datenbankfehler: {e}")
-        

@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Importiere alle notwendigen Funktionen
 from models.user_model import get_login
-from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles
+from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles, get_vehicle_status
 from models.rental_model import get_active_rentals, rent_vehicle, return_vehicle, get_user_rental_history
 from views.customer_view import show_customer_menu
 from views.employee_view import show_employee_menu
@@ -63,14 +63,27 @@ def handle_user_management(user_role, user_id):
 
             elif choice == '2':
                 vehicle_id = int(input("Fahrzeug-ID: "))
-                rent_vehicle(user_id, vehicle_id)
-                update_vehicle_status(vehicle_id, 'Rented')
+                status = get_vehicle_status(vehicle_id)
+
+                if status == 'Available':
+                    rent_vehicle(user_id, vehicle_id)
+                    update_vehicle_status(vehicle_id, 'Rented')
+                else:
+                    print(f"\nFehler: Fahrzeug mit ID {vehicle_id} ist nicht verfügbar. Aktueller Status: {status}")
 
             elif choice == '3':
+                print("\nFahrzeug zurückgeben:")
                 rental_id = int(input("Vermietungs-ID: "))
-                return_vehicle(rental_id)
-                vehicle_id = int(input("Fahrzeug-ID: "))
-                update_vehicle_status(vehicle_id, 'Available')
+                
+                # Holen der Fahrzeug-ID aus der Datenbank
+                vehicle_id_to_return = get_vehicle_id_from_rental(rental_id)
+                
+                if vehicle_id_to_return:
+                    return_vehicle(rental_id)
+                    update_vehicle_status(vehicle_id_to_return, 'Available')
+                else:
+                    print("Fehler: Vermietungs-ID nicht gefunden.")
+
             
             elif choice == '4':
                 print("\nIhre Miet-Historie:")

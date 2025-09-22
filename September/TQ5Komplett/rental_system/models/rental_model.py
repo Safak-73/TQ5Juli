@@ -5,6 +5,18 @@ import datetime
 # Importiere die Verbindung und den Cursor aus der db_connection-Datei.
 from database.db_connection import conn, cur
 
+def get_vehicle_id_from_rental(rental_id):
+    """Gibt die Fahrzeug-ID basierend auf der Vermietungs-ID zurück."""
+    try:
+        cur.execute("SELECT VehicleID FROM Rental WHERE RentalID = ?", (rental_id,))
+        result = cur.fetchone()
+        if result:
+            return result[0]
+        return None
+    except sqlite3.Error as e:
+        print(f"Datenbankfehler: {e}")
+        return None
+
 def rent_vehicle(customer_id, vehicle_id):
     """
     Erstellt eine neue Vermietung in der Datenbank mit dem Status 'Active'.
