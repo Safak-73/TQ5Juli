@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Importiere alle notwendigen Funktionen
 from models.user_model import get_login
 from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles, get_vehicle_status
-from models.rental_model import get_active_rentals, rent_vehicle, return_vehicle, get_user_rental_history
+from models.rental_model import get_active_rentals, rent_vehicle, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental
 from views.customer_view import show_customer_menu
 from views.employee_view import show_employee_menu
 
