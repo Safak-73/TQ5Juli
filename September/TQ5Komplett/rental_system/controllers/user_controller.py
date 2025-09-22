@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Importiere alle notwendigen Funktionen
 from models.user_model import get_login
 from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles, get_vehicle_status
-from models.rental_model import get_active_rentals, rent_vehicle, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental
+from models.rental_model import get_active_rentals, rent_vehicle, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental, get_rental_status
 from views.customer_view import show_customer_menu
 from views.employee_view import show_employee_menu
 
@@ -75,14 +75,22 @@ def handle_user_management(user_role, user_id):
                 print("\nFahrzeug zurückgeben:")
                 rental_id = int(input("Vermietungs-ID: "))
                 
-                # Holen der Fahrzeug-ID aus der Datenbank
-                vehicle_id_to_return = get_vehicle_id_from_rental(rental_id)
+                # NEUE LOGIK: Zuerst den Status prüfen
+                rental_status = get_rental_status(rental_id)
                 
-                if vehicle_id_to_return:
-                    return_vehicle(rental_id)
-                    update_vehicle_status(vehicle_id_to_return, 'Available')
+                if rental_status == 'Completed':
+                    print("Dieses Fahrzeug wurde bereits zurückgegeben.")
+                elif rental_status == 'Active':
+                    # Holen der Fahrzeug-ID aus der Datenbank und Überprüfung des Benutzers
+                    vehicle_id_to_return = get_vehicle_id_from_rental(rental_id, user_id)
+                    
+                    if vehicle_id_to_return:
+                        return_vehicle(rental_id)
+                        update_vehicle_status(vehicle_id_to_return, 'Available')
+                    else:
+                        print("Fehler: Vermietungs-ID nicht gefunden oder gehört nicht zu Ihrem Konto.")
                 else:
-                    print("Fehler: Vermietungs-ID nicht gefunden.")
+                    print("Fehler: Ungültige Vermietungs-ID.")
 
             
             elif choice == '4':
