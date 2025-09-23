@@ -74,3 +74,17 @@ def get_rental_status(rental_id):
     except sqlite3.Error as e:
         print(f"Datenbankfehler: {e}")
         return None
+
+def get_rental_dates(rental_id):
+    """
+    Gibt das Start- und Enddatum eines Mietvertrags zurück.
+    """
+    try:
+        cur.execute("SELECT StartDate, EndDate FROM Rental WHERE RentalID = ?", (rental_id,))
+        result = cur.fetchone()
+        if result:
+            return result
+        return None
+    except sqlite3.Error as e:
+        print(f"Datenbankfehler: {e}")
+        return None

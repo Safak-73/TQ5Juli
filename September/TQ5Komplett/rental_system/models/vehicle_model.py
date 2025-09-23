@@ -59,3 +59,17 @@ def update_vehicle_status(vehicle_id, new_status):
         print(f"Status von Fahrzeug {vehicle_id} erfolgreich auf '{new_status}' aktualisiert.")
     except sqlite3.Error as e:
         print(f"Datenbankfehler: {e}")
+
+def get_daily_rate(vehicle_id):
+    """
+    Gibt die Tagesrate (DailyRate) eines Fahrzeugs zurück.
+    """
+    try:
+        cur.execute("SELECT DailyRate FROM Vehicle WHERE VehicleID = ?", (vehicle_id,))
+        result = cur.fetchone()
+        if result:
+            return result[0]
+        return None
+    except sqlite3.Error as e:
+        print(f"Datenbankfehler: {e}")
+        return None

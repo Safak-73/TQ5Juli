@@ -2,13 +2,14 @@
 
 import sys
 import os
+from datetime import datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Importiere alle notwendigen Funktionen
 from models.user_model import get_login
-from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles, get_vehicle_status
-from models.rental_model import get_active_rentals, create_rental, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental, get_rental_status
+from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles, get_vehicle_status, get_daily_rate
+from models.rental_model import get_active_rentals, create_rental, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental, get_rental_status, get_rental_dates
 from views.customer_view import show_customer_menu
 from views.employee_view import show_employee_menu
 
@@ -85,8 +86,29 @@ def handle_user_management(user_role, user_id):
                     vehicle_id_to_return = get_vehicle_id_from_rental(rental_id, user_id)
                     
                     if vehicle_id_to_return:
-                        return_vehicle(rental_id)
-                        update_vehicle_status(vehicle_id_to_return, 'Available')
+                        # Berechne die Kosten
+                        rental_dates = get_rental_dates(rental_id)
+                        if rental_dates:
+                            start_date_str = rental_dates[0]
+                            end_date_str = datetime.now().strftime('%Y-%m-%d')
+                            
+                            start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+                            end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
+                            
+                            rental_days = (end_date - start_date).days
+                            
+                            daily_rate = get_daily_rate(vehicle_id_to_return)
+                            total_cost = rental_days * daily_rate
+                            
+                            return_vehicle(rental_id)
+                            update_vehicle_status(vehicle_id_to_return, 'Available')
+                            
+                            print(f"\nVermietung {rental_id} erfolgreich abgeschlossen.")
+                            print(f"Anzahl Miettage: {rental_days}")
+                            print(f"Tagesrate: {daily_rate:.2f} €")
+                            print(f"Gesamtkosten: {total_cost:.2f} €")
+                        else:
+                            print("Fehler: Mietvertragsdaten nicht gefunden.")
                     else:
                         print("Fehler: Vermietungs-ID nicht gefunden oder gehört nicht zu Ihrem Konto.")
                 else:
