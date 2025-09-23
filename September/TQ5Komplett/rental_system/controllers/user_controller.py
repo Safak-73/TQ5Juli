@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Importiere alle notwendigen Funktionen
 from models.user_model import get_login
 from models.vehicle_model import get_all_vehicles, add_vehicle, update_vehicle_status, get_available_vehicles, get_vehicle_status
-from models.rental_model import get_active_rentals, rent_vehicle, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental, get_rental_status
+from models.rental_model import get_active_rentals, create_rental, return_vehicle, get_user_rental_history, get_vehicle_id_from_rental, get_rental_status
 from views.customer_view import show_customer_menu
 from views.employee_view import show_employee_menu
 
@@ -66,7 +66,7 @@ def handle_user_management(user_role, user_id):
                 status = get_vehicle_status(vehicle_id)
 
                 if status == 'Available':
-                    rent_vehicle(user_id, vehicle_id)
+                    create_rental(user_id, vehicle_id)
                     update_vehicle_status(vehicle_id, 'Rented')
                 else:
                     print(f"\nFehler: Fahrzeug mit ID {vehicle_id} ist nicht verfügbar. Aktueller Status: {status}")

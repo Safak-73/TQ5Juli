@@ -17,7 +17,7 @@ def get_vehicle_id_from_rental(rental_id, customer_id):
         print(f"Datenbankfehler: {e}")
         return None
 
-def rent_vehicle(customer_id, vehicle_id):
+def create_rental(customer_id, vehicle_id):
     """
     Erstellt eine neue Vermietung in der Datenbank mit dem Status 'Active'.
     """
