@@ -1,6 +1,7 @@
 from database.db_connection import  get_connection
 import hashlib
 import os
+import sqlite3
  
 def hash_password(password, salt):
       return hashlib.sha256((salt + password).encode('utf-8')).hexdigest()  
