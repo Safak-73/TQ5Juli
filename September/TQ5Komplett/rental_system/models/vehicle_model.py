@@ -1,5 +1,9 @@
 # models/vehicle_model.py
 import sqlite3
+import logging
+
+logging.basicConfig(filename='rental_error.log', level=logging.ERROR,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Importiere die Verbindung und den Cursor aus der db_connection-Datei.
 from database.db_connection import conn, cur
@@ -12,7 +16,7 @@ def get_all_vehicles():
         cur.execute("SELECT * FROM Vehicle")
         return cur.fetchall()
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen aller Fahrzeuge: {e}")
         return []
 
 def add_vehicle(brand, model, year, daily_rate, status='Available'):
@@ -22,7 +26,7 @@ def add_vehicle(brand, model, year, daily_rate, status='Available'):
         conn.commit()
         print(f"Fahrzeug {brand} {model} erfolgreich hinzugefügt.")
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim eintragen von Fahrzeug: {e}")
 
 def get_available_vehicles():
     """
@@ -32,7 +36,7 @@ def get_available_vehicles():
         cur.execute("SELECT * FROM Vehicle WHERE Status = 'Available'")
         return cur.fetchall()
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim zeigen aller Fahrzeuge: {e}")
         return []
 
 def get_vehicle_status(vehicle_id):
@@ -46,7 +50,7 @@ def get_vehicle_status(vehicle_id):
             return result[0]
         return None
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen vom Fahrzeug status: {vehicle_id} - {e}")
         return None
         
 def update_vehicle_status(vehicle_id, new_status):
@@ -58,7 +62,7 @@ def update_vehicle_status(vehicle_id, new_status):
         conn.commit()
         print(f"Status von Fahrzeug {vehicle_id} erfolgreich auf '{new_status}' aktualisiert.")
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Updaten vom Fahrzeug Status: {vehicle_id} - {e}")
 
 def get_daily_rate(vehicle_id):
     """
@@ -71,5 +75,5 @@ def get_daily_rate(vehicle_id):
             return result[0]
         return None
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen von Tagesrate: {vehicle_id} - {e}")
         return None

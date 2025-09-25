@@ -1,6 +1,10 @@
 # models/rental_model.py
 import sqlite3
 import datetime
+import logging
+
+logging.basicConfig(filename='rental_error.log', level=logging.ERROR,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Importiere die Verbindung und den Cursor aus der db_connection-Datei.
 from database.db_connection import conn, cur
@@ -14,7 +18,7 @@ def get_vehicle_id_from_rental(rental_id, customer_id):
             return result[0]
         return None
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen der Fahrzeuge ID: {rental_id} - {e}")
         return None
 
 def create_rental(customer_id, vehicle_id):
@@ -27,7 +31,7 @@ def create_rental(customer_id, vehicle_id):
         conn.commit()
         print(f"Fahrzeug {vehicle_id} erfolgreich an Benutzer {customer_id} vermietet.")
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim erstellen der Vermietung: {vehicle_id} - {e}")
 
 def return_vehicle(rental_id):
     """
@@ -39,7 +43,7 @@ def return_vehicle(rental_id):
         conn.commit()
         print(f"Vermietung {rental_id} erfolgreich abgeschlossen.")
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler bei Fahrzeug rückgabe: {rental_id} - {e}")
 
 def get_active_rentals():
     """
@@ -49,7 +53,7 @@ def get_active_rentals():
         cur.execute("SELECT * FROM Rental WHERE Status = 'Active'")
         return cur.fetchall()
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim erstellen der vermietungs Historie: {e}")
         return []
 
 def get_user_rental_history(customer_id):
@@ -60,7 +64,7 @@ def get_user_rental_history(customer_id):
         cur.execute("SELECT * FROM Rental WHERE CustomerID = ?", (customer_id,))
         return cur.fetchall()
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim erstellen der Kunden miet Historie: {customer_id} - {e}")
         return []
     
 def get_rental_status(rental_id):
@@ -72,7 +76,7 @@ def get_rental_status(rental_id):
             return result[0]
         return None
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen des vermietungs Status: {rental_id} - {e}")
         return None
 
 def get_rental_dates(rental_id):
@@ -86,5 +90,5 @@ def get_rental_dates(rental_id):
             return result
         return None
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen des Mietdatum: {rental_id} - {e}")
         return None

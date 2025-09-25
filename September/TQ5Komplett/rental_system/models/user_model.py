@@ -1,4 +1,8 @@
 import sqlite3
+import logging
+
+logging.basicConfig(filename='user_error.log', level=logging.ERROR,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Importiere die Verbindung und den Cursor aus der db_connection-Datei.
 from database.db_connection import conn, cur
@@ -13,7 +17,7 @@ def get_user(user_id):
         cur.execute("SELECT * FROM User WHERE UserID = ?", (user_id,))
         return cur.fetchone()
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Abrufen von Benutzer (ID: {user_id}): {e}")
         return None
 
 def create_user(username, password, role):
@@ -33,7 +37,7 @@ def create_user(username, password, role):
         conn.commit()
         print(f"Benutzer '{username}' erfolgreich hinzugefügt.")
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim erstellen eines nutzers (ID: {username}): {e}")
 
 def update_password(user_id, new_password):
     """
@@ -51,7 +55,7 @@ def update_password(user_id, new_password):
         conn.commit()
         print(f"Passwort für Benutzer '{user_id}' erfolgreich aktualisiert.")
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Password ändern (ID: {user_id}): {e}")
 
 def get_login(username, password):
     """
@@ -61,5 +65,5 @@ def get_login(username, password):
         cur.execute("SELECT * FROM User WHERE Username = ? AND Password = ?", (username, password))
         return cur.fetchone()
     except sqlite3.Error as e:
-        print(f"Datenbankfehler: {e}")
+        logging.error(f"Fehler beim Einloggen {username}):{e}")
         return None
