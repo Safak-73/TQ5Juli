@@ -77,3 +77,14 @@ def get_daily_rate(vehicle_id):
     except sqlite3.Error as e:
         logging.error(f"Fehler beim Abrufen von Tagesrate: {vehicle_id} - {e}")
         return None
+
+def get_vehicle_details(vehicle_id):
+    """
+    [NEU] Gibt Marke und Modell eines Fahrzeugs zurück. Wird für die Historie-Anzeige benötigt.
+    """
+    try:
+        cur.execute("SELECT Brand, Model FROM Vehicle WHERE VehicleID = ?", (vehicle_id,))
+        return cur.fetchone()
+    except sqlite3.Error as e:
+        logging.error(f"Fehler beim Abrufen der Fahrzeugdetails (ID: {vehicle_id}): {e}")
+        return None
