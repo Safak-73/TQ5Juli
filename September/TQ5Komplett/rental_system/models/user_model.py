@@ -65,5 +65,5 @@ def get_login(username, password):
         cur.execute("SELECT * FROM User WHERE Username = ? AND Password = ?", (username, password))
         return cur.fetchone()
     except sqlite3.Error as e:
-        logging.error(f"Fehler beim Einloggen {username}):{e}")
+        logging.error(f"Datenbankfehler beim Login von Benutzer '{username}': {e}")
         return None
