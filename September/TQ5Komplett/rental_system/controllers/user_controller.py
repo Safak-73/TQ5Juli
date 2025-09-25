@@ -111,7 +111,7 @@ def handle_user_management(user_role, user_id):
                             payment_status = input("Zahlung erfolgreich? (ja/nein): ").lower()
                             
                             if payment_status == 'ja':
-                                return_vehicle(rental_id)
+                                return_vehicle(rental_id, total_cost)
                                 update_vehicle_status(vehicle_id_to_return, 'Available')
                                 print("\nZahlung erfasst. Fahrzeug erfolgreich zurückgegeben.")
                             else:

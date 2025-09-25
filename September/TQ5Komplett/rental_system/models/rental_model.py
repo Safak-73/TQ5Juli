@@ -33,13 +33,13 @@ def create_rental(customer_id, vehicle_id):
     except sqlite3.Error as e:
         logging.error(f"Fehler beim erstellen der Vermietung: {vehicle_id} - {e}")
 
-def return_vehicle(rental_id):
+def return_vehicle(rental_id, total_amount):
     """
-    Aktualisiert den Status einer Vermietung auf 'Completed'.
+    Aktualisiert den Status einer Vermietung auf 'Completed', setzt das Enddatum und speichert die Gesamtkosten.
     """
     try:
         return_date = datetime.date.today().isoformat()
-        cur.execute("UPDATE Rental SET EndDate = ?, Status = 'Completed' WHERE RentalID = ?", (return_date, rental_id))
+        cur.execute("UPDATE Rental SET EndDate = ?, TotalAmount = ?, Status = 'Completed' WHERE RentalID = ?", (return_date, total_amount, rental_id))
         conn.commit()
         print(f"Vermietung {rental_id} erfolgreich abgeschlossen.")
     except sqlite3.Error as e:
