@@ -64,12 +64,39 @@ def handle_user_management(user_role, user_id):
                     print(f"ID: {vehicle[0]}, Marke: {vehicle[1]}, Modell: {vehicle[2]}")
 
             elif choice == '2':
-                vehicle_id = int(input("Fahrzeug-ID: "))
+                try:
+                    vehicle_id = int(input("Fahrzeug-ID: "))
+                except ValueError:
+                    print("Ungültige Fahrzeug-ID. Bitte geben Sie eine Zahl ein.")
+                    continue
+
                 status = get_vehicle_status(vehicle_id)
 
                 if status == 'Available':
-                    create_rental(user_id, vehicle_id)
-                    update_vehicle_status(vehicle_id, 'Rented')
+                    # Startdatum wird auf das heutige Datum gesetzt, Enddatum wird abgefragt
+                    start_date = datetime.now().strftime('%Y-%m-%d') 
+                    
+                    print(f"\nStartdatum wird auf heute ({start_date}) gesetzt.")
+                    end_date = input("Geplantes Enddatum (Format: YYYY-MM-DD): ")
+                    
+                    try:
+                        # Einfache Validierung der Datumsformate
+                        end_date_dt = datetime.strptime(end_date, '%Y-%m-%d')
+                        start_date_dt = datetime.strptime(start_date, '%Y-%m-%d')
+                        
+                        # Logik: Enddatum muss nach dem Startdatum liegen
+                        if end_date_dt <= start_date_dt:
+                            print("Fehler: Das Enddatum muss nach dem heutigen Startdatum liegen.")
+                            continue
+
+                        # Übergabe beider Datums-Strings an das Model
+                        create_rental(user_id, vehicle_id, start_date, end_date) 
+                        update_vehicle_status(vehicle_id, 'Rented')
+                        
+                    except ValueError:
+                        print("Fehler: Ungültiges Datumsformat. Bitte verwenden Sie YYYY-MM-DD.")
+                        continue
+                        
                 else:
                     print(f"\nFehler: Fahrzeug mit ID {vehicle_id} ist nicht verfügbar. Aktueller Status: {status}")
 

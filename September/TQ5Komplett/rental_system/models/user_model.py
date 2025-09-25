@@ -1,7 +1,7 @@
 import sqlite3
 import logging
 
-logging.basicConfig(filename='user_error.log', level=logging.ERROR,
+logging.basicConfig(filename='rental_error.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Importiere die Verbindung und den Cursor aus der db_connection-Datei.

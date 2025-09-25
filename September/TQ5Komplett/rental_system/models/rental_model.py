@@ -21,15 +21,15 @@ def get_vehicle_id_from_rental(rental_id, customer_id):
         logging.error(f"Fehler beim Abrufen der Fahrzeuge ID: {rental_id} - {e}")
         return None
 
-def create_rental(customer_id, vehicle_id):
+def create_rental(customer_id, vehicle_id, start_date, end_date): 
     """
     Erstellt eine neue Vermietung in der Datenbank mit dem Status 'Active'.
     """
     try:
-        rent_date = datetime.date.today().isoformat()
-        cur.execute("INSERT INTO Rental (CustomerID, VehicleID, StartDate, Status) VALUES (?, ?, ?, ?)", (customer_id, vehicle_id, rent_date, 'Active'))
+        # rent_date = datetime.date.today().isoformat()
+        cur.execute("INSERT INTO Rental (CustomerID, VehicleID, StartDate, EndDate, Status) VALUES (?, ?, ?, ?, ?)", (customer_id, vehicle_id, start_date, end_date, 'Active'))
         conn.commit()
-        print(f"Fahrzeug {vehicle_id} erfolgreich an Benutzer {customer_id} vermietet.")
+        print(f"Fahrzeug {vehicle_id} erfolgreich an Benutzer {customer_id} vermietet von {start_date} bis {end_date}.")
     except sqlite3.Error as e:
         logging.error(f"Fehler beim erstellen der Vermietung: {vehicle_id} - {e}")
 
