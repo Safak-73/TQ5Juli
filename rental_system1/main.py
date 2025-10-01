@@ -3,8 +3,9 @@ from controllers.vehicle_controller import VehicleController
 from controllers.rental_controller import RentalController
 from views.main_menu import MainMenu
 
-
 def main():
+    print("🚀 Starte Programm...")  # Debug-Ausgabe
+
     user_controller = UserController()
     vehicle_controller = VehicleController()
     rental_controller = RentalController()
@@ -49,7 +50,6 @@ def main():
                 break
             else:
                 print("⚠️ Ungültige Auswahl!")
-
 
 if __name__ == "__main__":
     main()
