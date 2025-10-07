@@ -1,13 +1,13 @@
-import sqlite3
+# file name:    db_connection.py
+# file path:    rental_system/database/db_connection.pyimport sqlite3
+
+
 import os
 import logging
-# db_connection.py
-# rental_system/database/db_connection.py
- 
- 
- 
+
+
 DB_FILE = "rental.db"
- 
+
 def get_connection():
     conn = sqlite3.connect(DB_FILE)
    
@@ -15,7 +15,7 @@ def get_connection():
     # Foreign Keys aktivieren
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn
- 
+
 def init_logging():
     os.makedirs("logs", exist_ok=True)
     logging.basicConfig(
@@ -26,7 +26,7 @@ def init_logging():
             logging.StreamHandler()
         ]
     )
- 
+
 def init_db():
     with get_connection() as conn:
         cur = conn.cursor()
@@ -86,7 +86,7 @@ def init_db():
             FOREIGN KEY(RentalID) REFERENCES Rental(RentalID) ON DELETE CASCADE
         );
         """)
-       
+
 if __name__ == "__main__":
     init_logging()
     try:
