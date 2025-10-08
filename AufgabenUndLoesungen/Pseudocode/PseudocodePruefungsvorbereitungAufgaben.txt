@@ -1,0 +1,105 @@
+Aufgabe 1 Groessere Zahl finden:
+
+Eingabe a
+Eingabe b
+
+wenn a > b dann
+    Ausgabe "A groesser als B"
+sonst wenn b > a dann
+    Ausgabe "B groesser als A"
+sonst
+    Ausgabe "A ist gleich B"
+Ende wenn
+
+================================================================
+
+Aufgabe 2 Notendurchschnitt berechnen:
+
+Eingabe n
+summe := 0
+
+zähle i von 0 bis n
+    Eingabe note
+    summe := summe + note
+
+durchschnitt := summe / n
+
+Ausgabe "Der Durchschnitt ist: " + durchschnitt
+
+================================================================
+
+Aufgabe 3 Gerade oder Ungerade?:
+
+Ausgabe "Geben Sie bitte eine Zahl ein."
+Eingabe zahl
+
+wenn zahl % 2 = 0 dann
+    Ausgabe zahl + " ist gerade."
+sonst
+    Ausgabe zahl + " ist ungerade."
+Ende wenn
+
+================================================================
+Beispiel ein/ausgaben
+C#
+Console.WriteLine("Geben Sie bitte eine Zahl ein.");
+Console.ReadLine();
+Java
+System.out.println("Geben Sie bitte eine Zahl ein.");
+System
+
+================================================================
+
+Aufgabe 4 Kleinste Zahl finden:
+
+Eingabe a - 5
+Eingabe b - 4
+Eingabe c - 3
+
+kleinster_wert := a
+
+wenn kleinster_wert > b dann
+    kleinster_wert := b
+Ende wenn
+
+wenn kleinster_wert > c dann
+    kleinster_wert := c
+Ende wenn
+
+Ausgabe "Die kleinste Zahl ist: " + kleinster_wert
+
+================================================================
+
+Aufgabe 5 Wechselgeld berechnen:
+
+Eingabe preis
+Eingabe bezahlt
+
+wechselgeld := bezahlt - preis
+#Cent statt euro
+wechselgeld := wechselgeld * 100
+
+integer anzahl_2euro := wechselgeld mod 200
+wechselgeld := wechselgeld - 200 * anzahl_2euro
+
+integer anzahl_1euro := wechselgeld mod 100
+wechselgeld := wechselgeld - 100 * anzahl_1euro
+
+integer anzahl_50cent := wechselgeld mod 50
+wechselgeld := wechselgeld - 50 * anzahl_50cent
+
+wenn anzahl_2euro > 0 dann
+    Ausgabe anzahl_2euro + " x 2 Euro-Muenze"
+Ende wenn
+
+wenn anzahl_1euro > 0 dann
+    Ausgabe anzahl_1euro + " x 1 Euro-Muenze"
+Ende wenn
+
+wenn anzahl_50cent > 0 dann
+    Ausgabe anzahl_50cent + " x 50 Cent-Muenze"
+Ende wenn
+
+
+
+
