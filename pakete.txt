@@ -1,0 +1,4 @@
+101, 3.5, Berlin, True
+102, 2.0, Hamburg, False
+103, 4.0, München, True
+104, 1.5, Köln, False
