@@ -1,0 +1,29 @@
+def berechne_rabatt(betrag):        
+    rabatt_prozent = 0
+
+    # TODO: Rabattbedingungen ergänzen
+    if betrag < 100:
+        rabatt_prozent = 0
+    elif betrag < 500:
+        rabatt_prozent = 5
+    elif betrag < 1000:
+        rabatt_prozent = 10
+    else:
+        rabatt_prozent = 15
+
+    # TODO: Endbetrag berechnen
+    endbetrag = betrag - (betrag * rabatt_prozent / 100)
+
+    # TODO: Ausgabe der Ergebnisse
+    print(f"Einkaufswert: {betrag} €")
+    print(f"Rabatt: {rabatt_prozent} %")
+    print(f"Endbetrag: {endbetrag:.2f} €")
+    print("-" * 30)
+
+    return endbetrag
+
+# Testaufrufe:
+berechne_rabatt(80)
+berechne_rabatt(300)
+berechne_rabatt(750)
+berechne_rabatt(1200)
