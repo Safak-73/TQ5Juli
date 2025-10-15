@@ -1,0 +1,64 @@
+Drohnen reihenfolgen bestimmen in dem wir an Geopositionen anfliegen sollten.
+Alle punkte wo wir fliegen muessen sind vorhanden
+
+Wir haben eine variable geoPositions schon. Hier sind alle positionen 
+die wir anfliegen muessen definiert.
+
+Positionen sind Objekte der Klasse GeoPos. 
+GeoPos hat folgende attribute: 
+latitude, longitude und altitude
+Wir rufen diese auf in folgende weise: 'position.altitude'
+
+Wir haben eine Zweite Klasse um distanzen zu berechnen.
+Die Klasse heisst GeoCalculator. Es hat eine Methode: getDistance(pos1,pos2)
+Diese Methode berechnet die Distanz zwischen 2 GeoPos Objekte.
+Wir koennen sagen GeoCalculator.getDistance(drohnPosition,punktPosition)
+
+Resultat von das ganze soll eine geordnete Liste sein.
+Eine Liste bauen wie unser Paint beispiel: [a,e,b,d,c]
+Diese soll flightPositions heissen.
+Startposition schon an index = 0 vorhanden.
+Start stand der flightPositions liste ist wie folgt: [z]
+
+geoPositions duerfen wir veraendern
+Startposition (wo unser Drohn aktuell ist) => geoPosition[0]
+
+Pseudocode:
+
+flightPositions = []
+
+flightPositions[0] = geoPositions[0]
+currentPos = geoPositions[0]
+geoPositions.remove(0)
+
+solange not geoPositions.IsEmpty()
+
+    kleinste_distanze = float.MAX_VALUE
+    naechster_punkt_index = -1
+
+    zaehle index von 0 bis len(geoPositions)
+
+        distanz_zu_punkt = GeoCalculator.getDistance(currentPos,geoPositions[index])
+
+        wenn distanz_zu_punkt < kleinste_distanze dann
+            kleinste_distanze = distanz_zu_punkt
+            naechster_punkt_index = index
+        Ende wenn
+
+    Ende zaehle
+
+    flightPositions.append(geoPositions[naechster_punkt_index])
+    currentPos = flightPositions[len(flightPositions-1)]
+    geoPositions.remove(naechster_punkt_index)
+
+
+Ende solange
+
+return flightPositions
+
+
+
+
+
+
+
