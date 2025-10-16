@@ -1,7 +1,11 @@
+def eine_methode(list):
+    a = 0
 
-def add(a, b):
-        return a + b
-    
-def divide(a, b):
-        return a / b
-    
+    for i in list:
+        if i > a:
+            a = i
+
+    return a
+
+
+
