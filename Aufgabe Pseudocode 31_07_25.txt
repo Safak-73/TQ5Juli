@@ -1,0 +1,30 @@
+start ToDoListApplication
+
+	FUNCTION Main
+		Set TaskList TO leere Liste
+		
+		WHILE wahr DO
+			ANZEIGEN "1. Aufgabe hinzufügen"
+			ANZEIGEN "2. Aufgabe hinzufügen"
+			ANZEIGEN "3. Aufgabe hinzufügen"
+			ANZEIGEN "4. Aufgabe hinzufügen"
+			ANZEIGEN "5. Aufgabe hinzufügen"
+			ANZEIGEN "6. Aufgabe hinzufügen"
+			ANZEIGEN "7. Beenden"
+			
+			EINGABE userChoice
+			
+			FALLS userChoice IST
+				1 -> AUFRUF AddTask
+				2 -> AUFRUF EditTask
+				3 -> AUFRUF DeleteTask
+				4 -> AUFRUF MarkTaskCompleted
+				5 -> AUFRUF ViewTasks
+				6 -> AUFRUF SortTasks
+				7 -> BEENDEN
+				ANDERES -> ANZEIGEN "Ungültige Auswahl. Bitte erneut versuchen."
+			ENDE FALLS
+		END WHILE
+	ENDE FUNCTION
+
+ENDE ToDoListApplication
