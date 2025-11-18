@@ -1,0 +1,5 @@
+Wie kann man verhindern, dass ein Kunde mehrere Konten mit derselben Kontonummer bekommt?
+Sollte die Transaktionshistorie in einer externen Datei oder Datenbank gespeichert werden?
+Was ist der Vorteil einer Methode wie bankkonto_finden() gegenüber einer direkten Suche mit einer Schleife im Code?
+Sollte die PIN-Generierung in der Klasse Bankkonto mit print() ausgegeben werden oder besser intern bleiben?
+Wie könnte man das Projekt erweitern, damit ein Kunde mehrere Konten haben darf, aber die Bank trotzdem den Überblick behält?
