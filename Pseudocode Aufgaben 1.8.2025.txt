@@ -1,0 +1,107 @@
+Funktion AddTask
+    Deklariere description als Text
+    Deklariere dueDate als Text
+    Deklariere priority als Zahl
+    Deklariere task als Datensatz
+
+    Ausgabe "Enter task description: "
+    Eingabe description
+
+    Ausgabe "Enter due date (YYYY-MM-DD): "
+    Eingabe dueDate
+
+    Ausgabe "Enter priority (1-5): "
+    Eingabe priority
+
+    task <- Neuer Task(description, dueDate, priority, falsch)
+    TaskList hinzufügen task
+
+    Ausgabe "Task added successfully."
+EndeFunktion
+
+Funktion EditTask
+    Deklariere taskNumber als Zahl
+    Deklariere description als Text
+    Deklariere dueDate als Text
+    Deklariere priority als Zahl
+
+    Aufruf ViewTasks
+
+    Ausgabe "Enter task number to edit: "
+    Eingabe taskNumber
+
+    Wenn taskNumber gültig ist Dann
+        Ausgabe "Enter new description: "
+        Eingabe description
+
+        Ausgabe "Enter new due date (YYYY-MM-DD): "
+        Eingabe dueDate
+
+        Ausgabe "Enter new priority (1-5): "
+        Eingabe priority
+
+        TaskList[taskNumber].description <- description
+        TaskList[taskNumber].dueDate <- dueDate
+        TaskList[taskNumber].priority <- priority
+
+        Ausgabe "Task updated successfully."
+    Sonst
+        Ausgabe "Invalid task number."
+    EndeWenn
+EndeFunktion
+
+Funktion DeleteTask
+    Deklariere taskNumber als Zahl
+
+    Aufruf ViewTasks
+
+    Ausgabe "Enter task number to delete: "
+    Eingabe taskNumber
+
+    Wenn taskNumber gültig ist Dann
+        Entferne TaskList[taskNumber]
+        Ausgabe "Task deleted successfully."
+    Sonst
+        Ausgabe "Invalid task number."
+    EndeWenn
+EndeFunktion
+
+Funktion MarkTaskCompleted
+    Deklariere taskNumber als Zahl
+
+    Aufruf ViewTasks
+
+    Ausgabe "Enter task number to mark as completed: "
+    Eingabe taskNumber
+
+    Wenn taskNumber gültig ist Dann
+        TaskList[taskNumber].completed <- wahr
+        Ausgabe "Task marked as completed."
+    Sonst
+        Ausgabe "Invalid task number."
+    EndeWenn
+EndeFunktion
+
+Funktion ViewTasks
+    Für jedes task aus TaskList
+        Ausgabe task.nummer, task.beschreibung, task.fälligkeitsdatum, task.priorität, task.erledigt
+    EndeFür
+EndeFunktion
+
+Funktion SortTasks
+    Deklariere sortChoice als Zahl
+
+    Ausgabe "Sort by:"
+    Ausgabe "1. Due Date"
+    Ausgabe "2. Priority"
+    Eingabe sortChoice
+
+    Auswahl sortChoice
+        Fall 1:
+            Sortiere TaskList nach fälligkeitsdatum
+        Fall 2:
+            Sortiere TaskList nach priorität
+        Standard:
+            Ausgabe "Invalid choice."
+    EndeAuswahl
+EndeFunktion
