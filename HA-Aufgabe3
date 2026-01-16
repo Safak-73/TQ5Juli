@@ -1,0 +1,119 @@
+1. Einleitung
+Dieses Pflichtenheft beschreibt die technische Umsetzung eines digitalen Logistiksystems zur Planung und Verfolgung von Touren. Fahrer erhalten ihre Aufträge über eine mobile App, Disponenten arbeiten mit einer Webanwendung. Es wird besonderer Wert auf Echtzeit-Tracking, Datensicherheit und Systemintegration mit einem bestehenden ERP-System gelegt.
+
+2. Zielsetzung
+Entwicklung eines modularen Logistiksystems zur Verwaltung von Touren, zur Kommunikation mit Fahrern in Echtzeit sowie zur Übernahme von Altdaten aus einem bestehenden ERP-System.
+
+3. Systemübersicht
+Das System besteht aus:
+
+Fahrer-App (Android/iOS): Touranzeige und Statusaktualisierung
+
+Disponenten-Weboberfläche: Tourenplanung, Fahrerzuweisung
+
+Zentrales Backend: Datenverarbeitung, Schnittstellen, Authentifizierung
+
+ERP-Anbindung: Import von Stammdaten (Kunden, Adressen etc.)
+
+Live-Tracking-Komponente
+
+4. Produktfunktionen
+Fahrer:
+
+Anzeige geplanter Touren (Datum, Uhrzeit, Zieladressen)
+
+Änderung des Lieferstatus (z. B. „unterwegs“, „geliefert“)
+
+Standortübertragung in Echtzeit
+
+Disponenten:
+
+Planung und Bearbeitung von Touren
+
+Fahrerzuweisung über Weboberfläche
+
+Einsicht in Live-Positionen der Fahrzeuge
+
+Systemintegration:
+
+Einmalige oder regelmäßige Datenübernahme aus ERP-System (Kunden, Adressen, Aufträge)
+
+Sicherheitsfunktionen:
+
+Zugriffskontrolle nach Benutzerrollen
+
+Datensicherheit durch Verschlüsselung und sichere Übertragungswege
+
+5. Technische Umsetzung
+5.1 Architektur
+Client-Server-Modell mit REST-API
+
+Optional: Microservice-Architektur, z. B. für Tracking, Authentifizierung, Disposition
+
+Cloud-Hosting (z. B. AWS, Azure oder self-hosted)
+
+5.2 Technologien
+Fahrer-App: React Native oder Flutter (für Android und iOS)
+
+Web-Frontend: React oder Vue.js
+
+Backend: Node.js mit Express, alternativ Python (Django/Flask)
+
+Datenbank: PostgreSQL oder MongoDB
+
+Echtzeit-Tracking: WebSockets oder MQTT für bidirektionale Kommunikation
+
+5.3 Schnittstellen / Datenübernahme
+ERP-Import:
+
+CSV-Import oder REST-API-Anbindung
+
+Mapping-Logik für Stammdaten
+
+Validierung und Protokollierung von Importvorgängen
+
+5.4 Sicherheit & Zugriffskontrolle
+Benutzerauthentifizierung: OAuth2 oder JWT-Token
+
+Rollenmodell:
+
+Fahrer: eingeschränkter Zugriff (eigene Touren)
+
+Disponenten: vollständige Planung und Einsicht
+
+Admin: Benutzerverwaltung, Logs
+
+Transportverschlüsselung: HTTPS, TLS 1.3
+
+Speicher-Verschlüsselung: Optional für sensible Daten (AES-256)
+
+6. Plattformunterstützung
+Fahrer-App: Android & iOS (über Cross-Platform-Framework)
+
+Disponenten-Oberfläche: responsive Web-App (Desktop und Tablet optimiert)
+
+Backend & API: Plattformunabhängig, z. B. in Docker-Containern ausführbar
+
+7. Teststrategie
+7.1 Testarten
+Unit-Tests: für Backend-Logik und Berechnungsmethoden
+
+Integrationstests: App/API-Kommunikation
+
+Lasttests: z. B. bei hoher Anzahl gleichzeitiger Fahrzeugübertragungen
+
+Sicherheitstests: Penetration-Testing, Token-Manipulation, Rechteprüfung
+
+Usability-Tests: mit ausgewählten Fahrern und Disponenten
+
+7.2 Testumgebung
+Separates Testsystem mit anonymisierten Daten
+
+Simulierte Fahrzeuge zur Prüfung des Trackings
+
+8. Abgrenzung
+Keine automatische Routenoptimierung
+
+Kein Navigationssystem (kann über externe Apps angebunden werden)
+
+Kein Live-Support-/Chat-System integriert

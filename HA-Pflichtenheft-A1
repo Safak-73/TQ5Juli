@@ -1,0 +1,64 @@
+1. Einleitung
+Das vorliegende Pflichtenheft beschreibt die technische Umsetzung einer Android-App für ein Fitnessstudio. Die App ermöglicht Mitgliedern das Einloggen sowie das Einsehen ihres individuellen Trainingsplans.
+
+2. Zielsetzung
+Ziel ist die Entwicklung einer mobilen App für Android-Endgeräte, die Mitgliedern den Zugriff auf ihre persönlichen Trainingspläne ermöglicht.
+
+3. Systemübersicht
+Die App besteht aus folgenden Hauptkomponenten:
+
+Login- und Authentifizierungsmodul
+
+Trainingsplan-Anzeige
+
+Backend zur Datenverwaltung
+
+4. Produktfunktionen
+Login: Benutzer geben E-Mail und Passwort ein. Authentifizierung erfolgt über einen Token-basierten Mechanismus (z. B. JWT).
+
+Trainingsplan-Anzeige: Nach erfolgreichem Login wird der persönliche Trainingsplan angezeigt.
+
+Fehlermeldung & Validierung: Ungültige Logins und Eingabefehler werden dem Nutzer angezeigt.
+
+5. Technische Umsetzung
+5.1 Programmiersprache & Framework
+Frontend (App): Kotlin (empfohlen) oder Java mit Android SDK
+
+Backend: Node.js mit Express oder Python mit Flask/Django
+
+API-Kommunikation: RESTful API über HTTPS
+
+5.2 Datenhaltung
+Datenbank: PostgreSQL oder MySQL
+
+Tabellenstruktur (Beispiel):
+
+users (id, email, password_hash, name, …)
+
+training_plans (id, user_id, date, exercises)
+
+5.3 Login-Mechanismus
+Hashing der Passwörter mit bcrypt
+
+Authentifizierung via Login-API (Token wird im App-Storage gespeichert)
+
+Zugriffsschutz auf API-Routen durch Token-Validierung
+
+6. Plattform & Geräteunterstützung
+Zielplattform: Android 10 oder neuer
+
+Deployment über: Google Play Store (optional)
+
+7. Tests
+Unit-Tests: für API-Endpunkte und App-Logik
+
+UI-Tests: z. B. mit Espresso für Android
+
+Sicherheitstests: Prüfung auf unsichere API-Endpunkte
+
+8. Abgrenzung
+Keine iOS-Version
+
+Kein Community-Feature oder Terminbuchung
+
+Keine Trainer-Kommunikation

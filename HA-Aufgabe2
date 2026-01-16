@@ -1,0 +1,85 @@
+1. Einleitung
+Dieses Pflichtenheft beschreibt die technische Umsetzung eines Webshops mit Produktanzeige, Warenkorbfunktion, Bezahlmöglichkeiten (PayPal und Kreditkarte), einem Admin-Bereich zur Produktpflege und responsivem Design für verschiedene Endgeräte.
+
+2. Zielsetzung
+Ziel ist die Entwicklung eines plattformunabhängigen Webshops mit gängigen E-Commerce-Funktionen, einfachem Administrationsbereich und Unterstützung moderner Zahlungsmethoden.
+
+3. Systemübersicht
+Der Webshop besteht aus:
+
+Frontend: Produktanzeige, Warenkorb, Checkout
+
+Backend: Produktverwaltung, Warenkorb-Logik, Zahlungsabwicklung, API
+
+Admin-Panel: Verwaltung von Produkten durch berechtigte Benutzer
+
+4. Produktfunktionen
+Produktanzeige: Darstellung mit Bild, Beschreibung, Preis, Verfügbarkeit
+
+Warenkorb: Nutzer können Produkte hinzufügen, Menge ändern, entfernen
+
+Checkout: Erfassung von Kundendaten, Auswahl der Zahlungsart
+
+Bezahlung: Integration von PayPal & Kreditkarte (z. B. über Stripe)
+
+Admin-Bereich: Einloggen, Produkte anlegen/bearbeiten/löschen
+
+Responsives Design: Optimierte Darstellung auf Desktop und Mobilgeräten
+
+5. Technische Umsetzung
+5.1 Technologien
+Frontend: HTML, CSS (Tailwind oder Bootstrap), JavaScript (optional: React oder Vue.js)
+
+Backend: Node.js mit Express oder PHP mit Laravel oder Python mit Django
+
+Datenbank: MySQL oder PostgreSQL
+
+Zahlungsschnittstellen: PayPal REST API, Stripe für Kreditkarten
+
+Admin-Login: Session- oder JWT-basierte Authentifizierung
+
+5.2 Datenhaltung
+Tabellenstruktur (vereinfacht):
+
+products (id, name, description, price, stock, image_url)
+
+users (id, email, password_hash, role)
+
+orders (id, user_id, total_price, status)
+
+order_items (order_id, product_id, quantity, price)
+
+5.3 Admin-Panel
+Zugänglich nur für eingeloggte Benutzer mit Rolle „Admin“
+
+Funktionen: Produkte erstellen, bearbeiten, löschen
+
+Frontend getrennt oder im Backend integriert (z. B. Admin-Routen in Laravel oder Django)
+
+5.4 Responsive Webdesign
+Einsatz von CSS-Frameworks wie Tailwind CSS oder Bootstrap
+
+Flexibles Grid-System
+
+Mobile-First-Ansatz (z. B. Hamburger-Menü, Touch-Optimierung)
+
+6. Sicherheit
+Passwortspeicherung mit Hashing (z. B. bcrypt)
+
+Validierung aller Formulareingaben (Frontend + Backend)
+
+Schutz vor XSS/CSRF durch Frameworks und Token-Mechanismen
+
+7. Tests
+Unit-Tests: für Backend-Funktionen (z. B. Bestellprozess)
+
+Integrationstests: End-to-End-Tests mit Testdaten
+
+Responsiveness-Tests: mit Browser Developer Tools oder Tools wie BrowserStack
+
+8. Abgrenzung
+Kein Kundenkonto mit Bestellhistorie (kann später ergänzt werden)
+
+Keine Schnittstellen zu Versanddienstleistern
+
+Keine Gutschein- oder Rabattlogik

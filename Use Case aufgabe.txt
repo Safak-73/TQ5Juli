@@ -1,0 +1,62 @@
+Akteure:
+
+Kunde (verwaltet die Bestellung über die App)
+
+Bestellsystem (interne Logik der App zur Verarbeitung)
+
+Küchenpersonal (erhält die Bestellung)
+
+Zahlungssystem (externer Zahlungsdienstleister)
+
+Ziel:
+Der Kunde gibt eine Bestellung über die App auf, bezahlt diese und erhält eine Bestellbestätigung. Die Küche wird über die neue Bestellung informiert.
+
+Vorbedingungen:
+
+Der Kunde hat die App geöffnet.
+
+Der Kunde ist eingeloggt oder hat Gastbestellung aktiviert.
+
+Das Restaurant ist geöffnet und nimmt Bestellungen an.
+
+Nachbedingungen:
+
+Die Bestellung ist im System gespeichert.
+
+Die Küche wurde über die Bestellung benachrichtigt.
+
+Der Kunde hat eine digitale Bestätigung erhalten.
+
+Die Zahlung wurde abgeschlossen oder ist als „Barzahlung bei Lieferung“ vermerkt.
+
+Hauptablauf (Normalfall):
+
+Der Kunde wählt Speisen und Getränke aus dem Menü aus.
+
+Der Kunde legt die gewünschten Artikel in den Warenkorb.
+
+Der Kunde überprüft den Warenkorb.
+
+Der Kunde gibt seine Lieferadresse oder wählt „Abholung“.
+
+Der Kunde wählt eine Zahlungsmethode (z. B. PayPal, Kreditkarte, Barzahlung).
+
+Der Kunde bestätigt die Bestellung.
+
+Das System verarbeitet die Bestellung und sendet sie an die Küche.
+
+Der Kunde erhält eine Bestätigung mit voraussichtlicher Lieferzeit.
+
+Alternativabläufe:
+
+5a. Barzahlung bei Lieferung: Der Kunde wählt Barzahlung – das System vermerkt dies, ohne einen Zahlungsdienst zu aktivieren.
+
+4a. Abholung statt Lieferung: Kunde wählt Selbstabholung – es entfällt die Eingabe der Adresse.
+
+Ausnahmen:
+
+2a. Artikel nicht verfügbar: Ein gewählter Artikel ist ausverkauft – das System informiert den Kunden und bietet Alternativen.
+
+5b. Zahlung fehlgeschlagen: Online-Zahlung schlägt fehl – der Kunde wird aufgefordert, eine andere Methode zu wählen.
+
+7a. Systemfehler: Technischer Fehler bei der Übermittlung an die Küche – der Kunde erhält eine Fehlermeldung und kann die Bestellung erneut versuchen.

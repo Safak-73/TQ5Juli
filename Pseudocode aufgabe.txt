@@ -1,0 +1,32 @@
+Prozedur Hauptprogramm
+	deklariere aufgabenliste als liste
+
+	Solange wahr
+	gib aus "1. Add Task"
+	gib aus "2. Edit Task"
+	gib aus "3. Delete Task"
+	gib aus "4. Mark Task as completed"
+	gib aus "5. View Tasks"
+	gib aus "6. Sort Tasks"
+	gib aus "7. Exit"
+	
+	gib ein Benutzerwahl
+
+	wenn benutzerwahl = 1
+	ruf AddTask
+	wenn benutzerwahl = 2
+	ruf EditTask
+	wenn benutzerwahl = 3
+	ruf DeleteTask
+	wenn benutzerwahl = 4
+	ruf MarkTaskCompleted
+	wenn benutzerwahl = 5
+	ruf ViewTasks
+	wenn benutzerwahl = 6
+	ruf SortTask
+	wenn benutzerwahl = 7
+	beenden
+	ansonsten
+	gib aus "Invalid choice. Please try again"
+
+Ende prozedur
